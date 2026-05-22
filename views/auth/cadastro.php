@@ -18,7 +18,7 @@ session_start();
 
         </div>
 
-        <form action="../../controllers/AuthController.php" method="POST" class="flex flex-col gap-4">
+        <form action="../../controllers/UsuarioController.php" method="POST" class="flex flex-col gap-4">
 
 
             <div>
