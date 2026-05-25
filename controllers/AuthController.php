@@ -11,7 +11,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
         if( empty($email) || empty($senha) ){
             // redireciona para index avisando do erro
-            header("Location: ../index.php?erro=campos_vazios");
+            header("Location: ../views/auth/login.php?erro=campos_vazios");
             die;
         };
 
@@ -30,18 +30,18 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
                     $_SESSION["usuario_id"] = $resultado["id"];
                     $_SESSION["usuario_nome"] = $resultado["nome"];
                     $_SESSION["usuario_telefone"] = $resultado["telefone"];
+                    $_SESSION["usuario_tipo"] = $resultado["tipo"];
                 }
                 
                 header("Location: ../index.php?login=sucesso");
 
             } else {
                 // Senha incorreta
-                header("Location: ../index.php?login=erro");
+                 header("Location: ../views/auth/login.php?login=erro");
             }
        } else {
 
-            // Usuario nao encontrado
-            header("Location: ../index.php?login=erro");
+            header("Location: ../views/auth/login.php?login=erro");
        }
        
        die;
