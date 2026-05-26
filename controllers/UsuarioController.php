@@ -13,7 +13,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
         if(empty($nome) ||  empty($email) || empty($telefone) || empty($senha)){
             // redireciona para index avisando do erro
-            header("Location: ../index.php?erro=campos_vazios");
+            header("Location: ../views/auth/cadastro.php?erro=campos_vazios");
             die;
         }
 
@@ -25,14 +25,29 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
             $senha
         );
 
-        if($resultado){
+        if($resultado === "sucesso"){
             
-            header("Location: ../index.php?sucesso=cadastrado");
+            header("Location: ../views/auth/login.php?cadastro=sucesso");
+            die;
+
+        } elseif($resultado === "email_duplicado"){
+            header("Location: ../views/auth/cadastro.php?erro=email_duplicado");
+            die;
+
+        } elseif($resultado === "telefone_duplicado"){
+            header("Location: ../views/auth/cadastro.php?erro=telefone_duplicado");
+            die;
+
+        } elseif($resultado === "duplicado") {
+
+            header("Location: ../views/auth/cadastro.php?erro=duplicado");
+            die;
         } else {
 
-            header("Location: ../index.php?erro=banco");
+            header("Location: ../views/auth/cadastro.php?cadastro=erro");
+            die;
         }
-        die;
+        
     }
 
 }

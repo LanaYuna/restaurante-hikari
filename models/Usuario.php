@@ -20,18 +20,38 @@ class Usuario{
 
             $stmt->bind_param("sssss", $nome, $email, $telefone, $senha, $tipo);
 
-           if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }
 
+            try {
+
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    $conexao->close();
+                    return "sucesso";
+                }
+                
+            } catch( mysqli_sql_exception $erro){
+
+                if($erro->getCode() === 1062){ // CODIGO 1062 SIGNIFICA DADO DUPLICADO
+                    $mensagemErro = $erro->getMessage();
+                    $stmt->close();
+                    $conexao->close();
+
+                    if(str_contains($mensagemErro, "email")){
+                        return "email_duplicado";
+                    } elseif(str_contains($mensagemErro, "telefone")){
+                        return "telefone_duplicado";
+                    }
+                  
+                    return "duplicado";
+                }
+                
+            }
+           
             $stmt->close();
-        } else {
-            echo "Preparação falhou: " . $conexao->connect_error;
         }
 
         $conexao->close();
+        return "erro_generico";
     }
 
     public static function buscarPorEmail($email){
