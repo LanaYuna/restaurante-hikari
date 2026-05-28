@@ -11,8 +11,5 @@
         return $conexao;
     }
 
-    function voltarIndex(){
-        header("location:../index.php");
-    }
-    
+
 ?>
