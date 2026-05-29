@@ -8,7 +8,7 @@
     $listaCategorias = Categoria::exibirCategorias();
 ?>
 
-<main class="max-w-6xl mx-auto px-6 py-8 flex flex-col items-start">
+<main class="w-full p-12">
 
     <?php foreach ($listaCategorias as $categoria): ?>
 
@@ -25,24 +25,27 @@
                 <p class="text-zinc-500 text-sm italic">Nenhum prato disponível nessa categoria</p>
             <?php else: ?>
                 
-                <div>
+                <div class="flex gap-6 ">
 
                     <?php foreach ($produtosDaCategoria as $produto): ?>
-                        <div>
-                            <div>
-                                <h3>
+                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex flex-col gap-4 hover:border-zinc-700 transition-all">
+
+                           <div class="w-24 h-24 bg-zinc-800 rounded-lg overflow-hidden shrink-0">
+                                <img src="../../assets/img/produtos/<?php echo $produto['imagem']; ?>" 
+                                alt="Foto do <?php echo $produto['nome'];?>"
+                                class="w-full h-full object-cover">
+                            </div>
+
+                            <div class="flex-1 flex flex-col justify-between">
+                                <h3 class="font-bold">
                                     <?php echo $produto['nome']; ?>
                                 </h3>
                                 <span class="text-sm">
-                                    <?php echo $produto['preco']; ?>
+                                    R$<?php echo $produto['preco']; ?>
                                 </span>
                             </div>
 
-                            <div>
-                                <img src="/assets/img/produtos/<?php echo $produto['imagem']; ?>" 
-                                alt="Foto do <?php echo $produto['nome'];?>"
-                                >
-                            </div>
+                         
 
                         </div>
                     <?php endforeach; ?>
