@@ -26,15 +26,16 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
                 if(session_status() == PHP_SESSION_NONE){ // status estiver com sessao aberta mas ninguem conectado
                     session_start();
-
-                    $_SESSION["usuario_id"] = $resultado["id"];
-                    $_SESSION["usuario_nome"] = $resultado["nome"];
-                    $_SESSION["usuario_telefone"] = $resultado["telefone"];
-                    $_SESSION["usuario_tipo"] = $resultado["tipo"];
                 }
-                
-                header("Location: ../index.php?login=sucesso");
 
+                $_SESSION["usuario_id"] = $resultado["id"];
+                $_SESSION["usuario_nome"] = $resultado["nome"];
+                $_SESSION["usuario_telefone"] = $resultado["telefone"];
+                $_SESSION["usuario_tipo"] = $resultado["tipo"];
+       
+                header("Location: ../index.php?login=sucesso");
+                die;
+                
             } else {
                 // Senha incorreta
                  header("Location: ../views/auth/login.php?login=erro");

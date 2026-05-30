@@ -84,6 +84,7 @@ class Usuario{
             } 
 
             $stmt->close();
+            
         } else{
             echo "Preparação falhou". $conexao->connect_error;
         }

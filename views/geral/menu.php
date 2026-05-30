@@ -25,10 +25,10 @@
                 <p class="text-zinc-500 text-sm italic">Nenhum prato disponível nessa categoria</p>
             <?php else: ?>
                 
-                <div class="flex gap-6 ">
+                <div class="grid grid-cols-5 gap-6">
 
                     <?php foreach ($produtosDaCategoria as $produto): ?>
-                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex flex-col gap-4 hover:border-zinc-700 transition-all">
+                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex flex-col gap-4 hover:border-zinc-700 transition-all mb-4">
 
                            <div class="w-24 h-24 bg-zinc-800 rounded-lg overflow-hidden shrink-0">
                                 <img src="../../assets/img/produtos/<?php echo $produto['imagem']; ?>" 
@@ -45,9 +45,8 @@
                                 </span>
                             </div>
 
-                         
-
                         </div>
+
                     <?php endforeach; ?>
 
                 </div>

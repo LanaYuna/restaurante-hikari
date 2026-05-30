@@ -14,7 +14,7 @@
 
         <div class="flex items-center gap-8 shrink-0">
 
-            <button id="abrirModal" class="text-zinc-400 hover:text-red-500 transition-colors hover:scale-105 duration-200 flex items-center gap-2">
+            <button id="abrirModalEndereco" class="text-zinc-400 hover:text-red-500 transition-colors hover:scale-105 duration-200 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -44,7 +44,7 @@
     </nav>
 </header>
 
-
+<!-- MODAL ENDERECO -->
 <div
     id="modalEndereco"
     class="hidden fixed inset-0 bg-black/70 z-[100] items-center justify-center p-4 backdrop-blur-sm"
@@ -52,9 +52,9 @@
 
     <div class="bg-zinc-900 w-full max-w-md rounded-2xl border border-zinc-700 p-6 shadow-2xl">
 
-        <div class="flex items-center gap-6 justify-between mb-6 p-4">
+        <div class="flex items-center gap-4 justify-between mb-6 p-3">
 
-            <h2 class="text-xl font-bold text-white">
+            <h2 class="text-xl font-bold text-white ">
                 Onde você quer receber seu pedido?
             </h2>
 
@@ -62,28 +62,14 @@
                 id="fecharModalEndereco"
                 class="text-zinc-400 hover:text-red-500 transition"
             >
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6">
-
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18 18 6M6 6l12 12"
-                    />
-
-                </svg>
-
+                X
             </button>
 
         </div>
 
         <?php if(empty($enderecoUsuario)): ?>
 
-            <p class="text-zinc-300 mb-6 text-sm italic text-center">
+            <p class="text-zinc-300 mb-6 text-sm italic text-center p-4">
                 Nenhum endereço cadastrado.
             </p>
 
@@ -124,10 +110,13 @@
 
             </div>
 
-            <div class="flex gap-4 mt-8">
+            <form action="../../controllers/EnderecoController.php" class="flex gap-4 mt-8">
 
                 <button
                     class="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition"
+                    type="submit"
+                    name="acao"
+                    value="editar"
                 >
 
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +140,9 @@
 
                 <button
                     class="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl transition"
+                    type="submit"
+                    name="acao"
+                    value="apagar"
                 >
 
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -172,10 +164,72 @@
 
                 </button>
 
-            </div>
+            </form>
 
         <?php endif; ?>
 
     </div>
-
 </div>
+
+<!-- MODAL CADASTRO -->
+<div
+    id="modalCadastroEndereco"
+    class="hidden fixed inset-0 bg-black/60 z-[100] items-center justify-center px-4"
+>
+
+    <div class="bg-zinc-900 w-full max-w-md rounded-2xl border border-zinc-700 p-6">
+
+        <div class="flex items-center justify-between mb-6">
+
+            <h2 class="text-xl font-bold text-white">
+                Cadastrar endereço
+            </h2>
+
+            <button
+                id="fecharModalCadastro"
+                class="text-zinc-400 hover:text-red-500"
+            >
+                X
+            </button>
+
+        </div>
+
+        <form action="../../controllers/EnderecoController.php" method="POST" class="flex flex-col gap-4">
+
+            <input
+                type="text"
+                name="rua"
+                placeholder="Rua"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
+            >
+
+            <input
+                type="text"
+                name="numero"
+                placeholder="Número"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
+            >
+
+            <input
+                type="text"
+                name="complemento"
+                placeholder="Complemento"
+                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
+            >
+
+            <button
+                class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl"
+                type="submit"
+                name="acao"
+                value="cadastrar"
+            >
+                Salvar endereço
+            </button>
+
+        </form>
+
+    </div>
+
+</div>    
+    
+<script src="../../assets/js/modal-endereco.js"></script>
