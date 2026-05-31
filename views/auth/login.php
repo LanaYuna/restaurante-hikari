@@ -54,7 +54,7 @@ if (isset($_GET['login']) && $_GET['login'] === 'erro') {
                 type="submit"
                 name="acao"
                 value="logar"
-                class="bg-red-500 hover:bg-red-600 transition p-3 rounded-lg font-semibold mt-4""
+                class="bg-red-500 hover:bg-red-600 transition p-3 rounded-lg font-semibold mt-4"
             >
                 Logar
             </button>

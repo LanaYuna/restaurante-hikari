@@ -15,7 +15,7 @@
 
         <input
             type="search" 
-            id="busca-pratos"
+            id="buscaPratos"
             placeholder="Busque por comida ou categoria..." 
             class="flex-1 max-w-xl bg-zinc-800 text-zinc-100 placeholder-zinc-500 px-5 py-2.5 rounded-full border border-zinc-700 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-sm transition-all"
         >
