@@ -1,6 +1,8 @@
 <?php
 
-require_once "../../config/conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/hikari/config/conexao.php';
+
+require_once ROOT_PATH . 'config/conexao.php';
 
 Class Categoria {
 

@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+$usuario_id = $_SESSION["usuario_id"];
 
 require_once "../models/Endereco.php";
 
@@ -11,9 +12,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $rua = $_POST["rua"];
         $numero = $_POST["numero"];
         $complemento = $_POST["complemento"];
-        $usuario_id = $_SESSION["usuario_id"];
 
-        if(empty($rua) || empty($numero) || empty($complemento)){
+        if( trim($rua) === "" || trim($numero) === "" || trim($complemento) === ""){
 
             header("Location: ../views/geral/menu.php?erro=campos_vazios");
             die;
@@ -33,6 +33,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         } else {
 
             header("Location: ../views/geral/menu.php?cadastro=erro");
+        }
+
+        die;
+    }
+
+    if($_POST["acao"] == "editar"){
+
+        $resultado = Endereco::editar($usuario_id);
+        
+    }
+
+
+    if($_POST["acao"] == "apagar"){
+        
+        $resultado = Endereco::apagar($usuario_id);
+
+        if($resultado){
+
+            header("Location: ../views/geral/menu.php?delecao=sucesso");
+        } else {
+
+            header("Location: ../views/geral/menu.php?delecao=erro");
         }
 
         die;
