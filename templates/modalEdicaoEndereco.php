@@ -12,7 +12,7 @@
             </h2>
 
             <button
-                id="fecharModalCadastro"
+                id="fecharModalEdicao"
                 class="text-zinc-400 hover:text-red-500"
             >
                 X
@@ -26,7 +26,7 @@
                 type="text"
                 name="rua"
                 placeholder="Rua"
-                value="$_SESSION['']"
+                value="<?= htmlspecialchars($enderecoUsuario['rua']) ?>"
                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
             >
 
@@ -34,6 +34,7 @@
                 type="text"
                 name="numero"
                 placeholder="Número"
+                value="<?= htmlspecialchars($enderecoUsuario['numero']) ?>"
                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
             >
 
@@ -41,6 +42,7 @@
                 type="text"
                 name="complemento"
                 placeholder="Complemento"
+                value = "<?= htmlspecialchars($enderecoUsuario['complemento']) ?>"
                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-white"
             >
 
@@ -48,9 +50,9 @@
                 class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl"
                 type="submit"
                 name="acao"
-                value="cadastrar"
+                value="editar"
             >
-                Salvar endereço
+                Atualizar endereço
             </button>
 
         </form>

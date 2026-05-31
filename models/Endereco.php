@@ -73,8 +73,31 @@ class Endereco {
         return null;
     }
 
-    public static function editar($usuario_id){
-        
+    public static function editar($rua, $numero, $complemento, $usuario_id){
+
+        $conexao = abrirBanco();
+
+        if($conexao->connect_error){
+            return false;
+        }
+
+        $sql = "UPDATE endereco SET rua = ?, numero = ?, complemento = ? WHERE usuario_id = ?";
+
+        $stmt = $conexao->prepare($sql);
+
+        if(!$stmt){
+            $conexao->close();
+            return false;
+        }
+
+        $stmt->bind_param("sisi", $rua, $numero, $complemento, $usuario_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexao->close();
+
+        return $resultado;
     }
     
     public static function apagar($usuario_id){

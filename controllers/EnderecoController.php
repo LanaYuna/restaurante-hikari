@@ -36,13 +36,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         die;
-    }
+    };
 
     if($_POST["acao"] == "editar"){
 
-        $resultado = Endereco::editar($usuario_id);
-        
-    }
+        $rua = $_POST["rua"];
+        $numero = $_POST["numero"];
+        $complemento = $_POST["complemento"];
+
+        if( trim($rua) === "" || trim($numero) === "" || trim($complemento) === ""){
+
+            header("Location: ../views/geral/menu.php?erro=campos_vazios");
+            die;
+        }
+
+
+        $resultado = Endereco::editar(
+            $rua,
+            $numero,
+            $complemento,
+            $usuario_id
+        );
+
+        if($resultado){
+            header("Location: ../views/geral/menu.php?edicao=sucesso");
+        } else {
+            header("Location: ../views/geral/menu.php?edicao=erro");
+        }
+
+        die;
+
+    };
 
 
     if($_POST["acao"] == "apagar"){
@@ -58,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         die;
-    }
+    };
 }
 
 ?>

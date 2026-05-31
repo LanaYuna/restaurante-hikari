@@ -56,4 +56,4 @@
 <?php include "modalEdicaoEndereco.php"; ?> 
 <?php include "modalCadastroEndereco.php"; ?> 
 
-<script src="../../assets/js/modalEndereco.js"></script>
+<script src="../../assets/js/modalEndereco.js" defer></script>
