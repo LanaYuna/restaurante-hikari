@@ -30,6 +30,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
                 $_SESSION["usuario_id"] = $resultado["id"];
                 $_SESSION["usuario_nome"] = $resultado["nome"];
+                $_SESSION["usuario_email"] = $resultado["email"];
                 $_SESSION["usuario_telefone"] = $resultado["telefone"];
                 $_SESSION["usuario_tipo"] = $resultado["tipo"];
        
@@ -38,7 +39,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
                 
             } else {
                 // Senha incorreta
-                 header("Location: ../views/auth/login.php?login=erro");
+                header("Location: ../views/auth/login.php?login=erro");
             }
        } else {
 

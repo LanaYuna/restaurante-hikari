@@ -1,53 +1,72 @@
-<form action="../../controllers/CarrinhoController.php" method="POST" class="flex flex-col gap-4">
-    <div
-        id="modalProduto"
-        class="hidden fixed inset-0 z-[100] items-center justify-center p-4 backdrop-blur-sm"
-    >
-        <div class="bg-zinc-900 w-full max-w-xl rounded-2xl border border-zinc-700 p-6 shadow-2xl">
-            <div class="flex items-center gap-4 justify-between mb-6 p-3">
+<div
+    id="modalProduto"
+    class="hidden fixed inset-0 z-[100] items-center justify-center p-4 backdrop-blur-sm"
+>
+    <div class="bg-zinc-900 w-full max-w-xl rounded-2xl border border-zinc-700 p-6 shadow-2xl">
+        <div class="flex items-center gap-4 justify-between mb-6 p-3">
 
-                <h2 class="text-xl font-bold text-white ">
-                    Detalhes do produto
-                </h2>
+            <h2 class="text-xl font-bold text-white ">
+                Detalhes do produto
+            </h2>
 
-                <button
-                    id="fecharModalProduto"
-                    class="text-zinc-400 hover:text-red-500 transition"
-                >
-                    X
-                </button>
+            <button
+                id="fecharModalProduto"
+                class="text-zinc-400 hover:text-red-500 transition"
+            >
+                X
+            </button>
 
+        </div>
+
+        <div class="bg-zinc-900 p-6 rounded-xl flex flex-col gap-4">
+
+            <img
+                id="modalImagem"
+                class="w-full h-56 object-cover rounded-lg"
+            >
+
+            <div>
+                <h2 id="modalNome" class="text-2xl font-bold"></h2>
+
+                <p id="modalDescricao" class="text-zinc-400 mt-2">
+                </p>
             </div>
 
-            <div class="bg-zinc-900 p-6 rounded-xl w-[500px] flex flex-col">
+            <span
+                id="modalPreco"
+                class="text-xl font-semibold text-red-500"
+            ></span>
 
-                <img id="modalImagem">
+            <div class="flex flex-col gap-2">
 
-                <h2 id="modalNome" class="text-lg"></h2>
+                <label
+                    for="quantidade"
+                    class="font-medium"
+                >
+                    Quantidade
+                </label>
 
-                <p id="modalDescricao"></p>
-
-                <span id="modalPreco"  class="mt-4"></span>
-
-                <label for="quantidade">Quantidade:</label>
                 <input
                     type="number"
                     id="quantidade"
-                    value="1"
                     min="1"
-                    class="m-5"
+                    value="1"
+                    class="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white"
                 >
 
-                <button 
-                    type="submit"
+            </div>
+
+            <form action="../../controllers/CarrinhoController.php" method="POST" class="flex flex-col gap-4">
+                <button
+                    type="button"
                     name="acao"
                     value="adicionar"
-                    class="bg-red-500 hover:bg-red-600 transition p-3 rounded-lg font-semibold mt-4"                    
+                    class="bg-red-500 hover:bg-red-600 transition p-3 rounded-lg font-semibold"
                 >
                     Adicionar ao Carrinho
                 </button>
-
-            </div>
+            </form>
+            
         </div>
     </div>
-</form>
+</div>

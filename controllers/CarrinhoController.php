@@ -5,6 +5,7 @@ if (!isset($_SESSION['carrinho'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
+    
     $acao = $_POST['acao'];
 
     if ($acao === 'adicionar') {
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
             ];
         }
         
-        header('Location: ../views/geral/menu.php');
+        header('Location: ../views/geral/carrinho.php');
         exit;
     }
 
