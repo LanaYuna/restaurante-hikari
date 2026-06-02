@@ -17,7 +17,7 @@ Class Produto {
         
        $produtos = [];
         if ($stmt) {
-            $stmt->bind_param("i", $categoriaId); // "i" de integer (ID)
+            $stmt->bind_param("i", $categoriaId); 
             $stmt->execute();
             $resultado = $stmt->get_result();
             
@@ -28,7 +28,7 @@ Class Produto {
         }
         
         $conexao->close();
-        return $produtos; // Retorna apenas os produtos daquela categoria específica
+        return $produtos; 
     }
 }
 

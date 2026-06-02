@@ -10,7 +10,7 @@
     <nav class="w-full max-w-[1440px] mx-auto flex items-center justify-between px-6 h-20 gap-12">
 
         <a href="#" class="shrink-0">
-            <img src="assets/img/logo.png" alt="Logo do Hikari" class="h-10 w-auto object-contain">
+            <img src="../../assets/img/logo/hikari.png" alt="Logo do Hikari" class="h-16 w-auto object-contain ">
         </a>
 
         <input

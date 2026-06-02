@@ -1,6 +1,8 @@
 <?php
 
-require_once "../config/conexao.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/hikari/config/conexao.php';
+
+require_once ROOT_PATH . 'config/conexao.php';
 
 class Usuario{
 
@@ -93,6 +95,93 @@ class Usuario{
         return false;
     }
     
+    public static function editar($nome, $email, $telefone, $usuario_id){
+
+        $conexao = abrirBanco();
+
+        if($conexao->connect_error){
+            return false;
+        }
+
+        $sql = "UPDATE usuario SET nome = ?, email = ?, telefone = ? WHERE id = ?";
+
+        $stmt = $conexao->prepare($sql);
+
+        if(!$stmt){
+            $conexao->close();
+            return false;
+        }
+
+        $stmt->bind_param("sssi", $nome, $email, $telefone, $usuario_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexao->close();
+
+        return $resultado;
+    }
+
+    public static function apagar($usuario_id){
+
+            $conexao = abrirBanco();
+
+            if($conexao->connect_error){
+                return false;
+            }
+
+            $sql = "DELETE FROM usuario WHERE usuario_id = ?";
+            $stmt = $conexao->prepare($sql);
+
+            $stmt->bind_param("i", $usuario_id);
+
+            $resultado = $stmt->execute();
+
+            $stmt->close();
+            $conexao->close();
+
+            return $resultado;
+    }
+
+    public static function buscarPorId($id){
+
+        $conexao = abrirBanco();
+
+        if($conexao->connect_error) {
+            return false;
+        }
+
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $conexao->prepare($sql);
+
+        if($stmt){
+
+            $stmt->bind_param("i", $id); 
+
+            if($stmt->execute()){
+
+                $resultadoBanco = $stmt->get_result();
+
+                if($resultadoBanco->num_rows > 0){
+                    $usuario = $resultadoBanco->fetch_assoc(); 
+                    
+                    $stmt->close();
+                    $conexao->close();
+
+                    return $usuario; 
+                }
+            } 
+
+            $stmt->close();
+            
+        } else{
+            echo "Preparação falhou". $conexao->connect_error;
+        }
+
+        $conexao->close();
+        return false;
+
+    }
 }
 
 ?>

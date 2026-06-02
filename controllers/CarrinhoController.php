@@ -14,18 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $imagem = $_POST['imagem'];
-        $qtd = isset($_POST['quantidade']) ? (int)$_POST['quantidade'] : 1;
+        $quantidade = isset($_POST['quantidade']) ? (int)$_POST['quantidade'] : 1; //garantia de uma unidade
 
         // Se o produto já está no carrinho, apenas atualiza a quantidade
         if (isset($_SESSION['carrinho'][$id])) {
-            $_SESSION['carrinho'][$id]['quantidade'] += $qtd;
+            $_SESSION['carrinho'][$id]['quantidade'] += $quantidade;
 
         } else {
             // Se for um produto novo, adiciona no array
             $_SESSION['carrinho'][$id] = [
                 'nome' => $nome,
                 'preco' => $preco,
-                'quantidade' => $qtd,
+                'quantidade' => $quantidade,
                 'imagem' => $imagem
             ];
         }
@@ -36,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
 
     if ($acao === 'remover') {
         $id = $_POST['produto_id'];
+        
         if (isset($_SESSION['carrinho'][$id])) {
 
-            unset($_SESSION['carrinho'][$id]); // Remove o item do array
+            unset($_SESSION['carrinho'][$id]); 
         }
         
         header('Location: ../views/geral/carrinho.php');

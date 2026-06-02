@@ -18,55 +18,45 @@
 
         </div>
 
-        <div class="bg-zinc-900 p-6 rounded-xl flex flex-col gap-4">
+        <form action="../../controllers/CarrinhoController.php" method="POST" class="flex flex-col gap-4">
+            <div class="bg-zinc-900 p-6 rounded-xl flex flex-col gap-4">
 
-            <img
-                id="modalImagem"
-                class="w-full h-56 object-cover rounded-lg"
-            >
+                <img id="modalImagem" class="w-full h-56 object-cover rounded-lg">
 
-            <div>
-                <h2 id="modalNome" class="text-2xl font-bold"></h2>
+                <div>
+                    <h2 id="modalNome" class="text-2xl font-bold"></h2>
+                    <p id="modalDescricao" class="text-zinc-400 mt-2"></p>
+                </div>
 
-                <p id="modalDescricao" class="text-zinc-400 mt-2">
-                </p>
-            </div>
+                <span id="modalPreco" class="text-xl font-semibold text-red-500"></span>
 
-            <span
-                id="modalPreco"
-                class="text-xl font-semibold text-red-500"
-            ></span>
+                <div class="flex flex-col gap-2">
 
-            <div class="flex flex-col gap-2">
+                    <label for="quantidade" class="font-medium">
+                        Quantidade
+                    </label>
 
-                <label
-                    for="quantidade"
-                    class="font-medium"
-                >
-                    Quantidade
-                </label>
+                    <input
+                        type="number"
+                        id="quantidade"
+                        min="1"
+                        value="1"
+                        class="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white"
+                    >
 
-                <input
-                    type="number"
-                    id="quantidade"
-                    min="1"
-                    value="1"
-                    class="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white"
-                >
+                </div>
 
-            </div>
 
-            <form action="../../controllers/CarrinhoController.php" method="POST" class="flex flex-col gap-4">
                 <button
-                    type="button"
+                    type="submit"
                     name="acao"
                     value="adicionar"
                     class="bg-red-500 hover:bg-red-600 transition p-3 rounded-lg font-semibold"
                 >
                     Adicionar ao Carrinho
                 </button>
-            </form>
-            
-        </div>
+                
+            </div>
+        </form>
     </div>
 </div>

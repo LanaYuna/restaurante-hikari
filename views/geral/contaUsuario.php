@@ -2,6 +2,10 @@
 session_start();
 
 include "../../templates/header.php";
+require_once "../../models/Usuario.php";
+
+$usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
+
 ?>
 
 <main class="max-w-5xl mx-auto p-8 flex flex-col gap-8">
@@ -24,17 +28,17 @@ include "../../templates/header.php";
 
             <p>
                 <span>Nome:</span>
-                <?php echo $_SESSION["usuario_nome"]; ?>
+                <?php echo $usuario["nome"]; ?>
             </p>
 
             <p>
                 <span>Email:</span>
-                <?php echo $_SESSION["usuario_email"]; ?>
+                <?php echo $usuario["email"]; ?>
             </p>
 
             <p>
                 <span>Telefone:</span>
-                <?php echo $_SESSION["usuario_telefone"]; ?>
+                <?php echo $usuario["telefone"]; ?>
             </p>
 
         </div>
@@ -80,7 +84,7 @@ include "../../templates/header.php";
             <button
                 type="submit"
                 name="acao"
-                value="editarDados"
+                value="editar"
                 class="bg-red-600 p-3 rounded-lg hover:bg-red-700"
             >
                 Salvar Alterações
@@ -107,14 +111,14 @@ include "../../templates/header.php";
 
             <input
                 type="password"
-                name="senha_atual"
+                name="senhaAtual"
                 placeholder="Senha atual"
                 class="bg-zinc-800 p-3 rounded-lg"
             >
 
             <input
                 type="password"
-                name="nova_senha"
+                name="novaSenha"
                 placeholder="Nova senha"
                 class="bg-zinc-800 p-3 rounded-lg"
             >
@@ -173,23 +177,30 @@ include "../../templates/header.php";
             Apagar conta
         </h2>
 
-        <div class="flex flex-col gap-4">
+        <form
+            action="../../controllers/UsuarioController.php"
+            method="POST"
+            class="flex flex-col gap-4"
+        >
 
-            <p> 
-                Atenção: Após a aprovação, essa ação não poderá ser revertida.
-            </p>
+            <div class="flex flex-col gap-4">
 
-            <button
-                type="submit"
-                name="acao"
-                value="apagar"
-                class="bg-red-600 p-3 rounded-lg hover:bg-red-700"
-            >
-                Apagar conta
-            </button>
+                <p> 
+                    Atenção: Após a aprovação, essa ação não poderá ser revertida.
+                </p>
 
-        </div>
+                <button
+                    type="submit"
+                    name="acao"
+                    value="apagar"
+                    class="bg-red-600 p-3 rounded-lg hover:bg-red-700"
+                >
+                    Apagar conta
+                </button>
 
+            </div>
+
+        </form>
 </main>
 
 <?php include "../../templates/footer.php"  ?>

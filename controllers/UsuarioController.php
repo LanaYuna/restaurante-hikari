@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+$usuario_id = $_SESSION["usuario_id"];
+$email = $_SESSION["email"];
+
 require_once "../models/Usuario.php";
 
 if( $_SERVER["REQUEST_METHOD"] == "POST" ){
@@ -47,6 +51,73 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
         }
         
         die;
+    }
+
+    if($_POST["acao"] == "editar"){
+
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $telefone = $_POST["telefone"];
+
+        if( trim($nome) === "" || trim($email) === "" || trim($telefone) === ""){
+
+            header("Location: ../views/geral/contaUsuario.php?erro=campos_vazios");
+            die;
+        }
+
+        $resultado = Usuario::editar(
+            $nome,
+            $email,
+            $telefone,
+            $usuario_id
+        );
+
+        if($resultado){
+            header("Location: ../views/geral/contaUsuario.php?edicao=sucesso");
+        } else {
+            header("Location: ../views/geral/contaUsuario.php?edicao=erro");
+        }
+
+        die;
+
+    }
+
+    if($_POST["acao"] == "alterarSenha"){
+
+        $senhaAtual = $_POST["senhaAtual"];
+        $senhaNova = $_POST["senhaNova"];
+
+        $resultado = Usuario::buscarEmail($email);
+
+        if($resultado){
+            $senhaBanco = $resultado["senha"];
+
+            if(password_verify($senha, $senhaBanco)){ 
+
+                $resultadoAtualizacao = Usuario::alterarSenha();
+        
+                    header("Location: ../views/geral/contaUsuario.php?edicao=sucesso");
+                    
+                } else {
+                    // Senha incorreta
+                    header("Location: ../views//views/geral/contaUsuario.php?edicao=erro");
+                }
+            }
+        die;
+
+    }
+
+    if($_POST["acao"] == "apagar"){
+
+        $resultado = Usuario::apagar($usuario_id);
+
+        if($resultado){
+
+            header("Location: ../index.php?exclusao=sucesso");
+        } else {
+
+            header("Location: ../index.php?exclusao=erro");
+        }
     }
 
 }
