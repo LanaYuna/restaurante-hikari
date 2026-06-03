@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $imagem = $_POST['imagem'];
-        $quantidade = isset($_POST['quantidade']) ? (int)$_POST['quantidade'] : 1; //garantia de uma unidade
-
+        $quantidade = isset($_POST['quantidade']) ? (int)$_POST['quantidade'] : 1; 
+        
         // Se o produto já está no carrinho, apenas atualiza a quantidade
         if (isset($_SESSION['carrinho'][$id])) {
             $_SESSION['carrinho'][$id]['quantidade'] += $quantidade;

@@ -2,7 +2,7 @@
 
 session_start();
 $usuario_id = $_SESSION["usuario_id"];
-$email = $_SESSION["email"];
+$email = $_SESSION["usuario_email"];
 
 require_once "../models/Usuario.php";
 
@@ -100,7 +100,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
                     
                 } else {
                     // Senha incorreta
-                    header("Location: ../views//views/geral/contaUsuario.php?edicao=erro");
+                    header("Location: ../views/views/geral/contaUsuario.php?edicao=erro");
                 }
             }
         die;
@@ -113,10 +113,23 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
         if($resultado){
 
-            header("Location: ../index.php?exclusao=sucesso");
+            session_start();
+            session_unset();
+            session_destroy();
+
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }
+
+            header("Location: ../index.php");
+            exit();
         } else {
 
-            header("Location: ../index.php?exclusao=erro");
+            header("Location: ../views/geral/contaUsuario.php?exclusao=erro");
         }
     }
 

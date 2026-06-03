@@ -130,7 +130,7 @@ class Usuario{
                 return false;
             }
 
-            $sql = "DELETE FROM usuario WHERE usuario_id = ?";
+            $sql = "DELETE FROM usuario WHERE id = ?";
             $stmt = $conexao->prepare($sql);
 
             $stmt->bind_param("i", $usuario_id);

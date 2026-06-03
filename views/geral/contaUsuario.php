@@ -63,21 +63,21 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
             <input
                 type="text"
                 name="nome"
-                value="<?php echo $_SESSION["usuario_nome"]; ?>"
+                value="<?php echo $usuario["nome"]; ?>"
                 class="bg-zinc-800 p-3 rounded-lg"
             >
 
             <input
                 type="email"
                 name="email"
-                value="<?php echo $_SESSION["usuario_email"]; ?>"
+                value="<?php echo $usuario["email"]; ?>"
                 class="bg-zinc-800 p-3 rounded-lg"
             >
 
             <input
                 type="text"
                 name="telefone"
-                value="<?php echo $_SESSION["usuario_telefone"]; ?>"
+                value="<?php echo $usuario["telefone"]; ?>"
                 class="bg-zinc-800 p-3 rounded-lg"
             >
 
@@ -94,7 +94,7 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
 
     </section>
 
-    <section
+    <!-- <section
         id="senha"
         class="bg-zinc-900 p-8 rounded-xl border border-zinc-800"
     >
@@ -134,7 +134,7 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
 
         </form>
 
-    </section>
+    </section> -->
 
     <section
         id="historico"
@@ -193,6 +193,7 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
                     type="submit"
                     name="acao"
                     value="apagar"
+                    onclick="return confirm('Tem certeza que deseja apagar sua conta?')"
                     class="bg-red-600 p-3 rounded-lg hover:bg-red-700"
                 >
                     Apagar conta
