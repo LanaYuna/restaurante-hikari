@@ -26,9 +26,12 @@ class Usuario{
             try {
 
                 if ($stmt->execute()) {
+
+                    $id = $conexao->insert_id; // RETORNA ID DO USUÁRIO APÓS INSERT
                     $stmt->close();
                     $conexao->close();
-                    return "sucesso";
+
+                    return $id;
                 }
                 
             } catch( mysqli_sql_exception $erro){

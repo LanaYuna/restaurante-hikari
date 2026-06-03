@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-$usuario_id = $_SESSION["usuario_id"];
-$email = $_SESSION["usuario_email"];
+$usuario_id = $_SESSION["usuario_id"] ?? null;
+$email = $_SESSION["usuario_email"] ?? null;
 
 require_once "../models/Usuario.php";
 
@@ -28,9 +28,19 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
             $senha
         );
 
-        if($resultado === "sucesso"){
+        // RESULTADO RETORNA ID DO USUÁRIO CADASTRADO
+
+        if(is_int($resultado)){
+
+            $dados = Usuario::buscarPorId($resultado);
+
+            $_SESSION["usuario_id"] = $dados["id"];
+            $_SESSION["usuario_nome"] = $dados["nome"];
+            $_SESSION["usuario_email"] = $dados["email"];
+            $_SESSION["usuario_telefone"] = $dados["telefone"];
+            $_SESSION["usuario_tipo"] = $dados["tipo"];
             
-            header("Location: ../views/auth/login.php?cadastro=sucesso");
+            header("Location: ../views/geral/menu.php?cadastro=sucesso");
 
         } elseif($resultado === "email_duplicado"){
 

@@ -1,6 +1,6 @@
 <?php
     include "../../templates/header.php";
-    include "../../templates/navbar.php";
+    include "../../templates/navbar.php"; // tem session_start()
 
     require_once "../../models/Categoria.php";
     require_once "../../models/Produto.php";

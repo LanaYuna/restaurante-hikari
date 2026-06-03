@@ -3,6 +3,11 @@
 
     require_once "../../models/Endereco.php";
 
+    if(!isset($_SESSION["usuario_id"])){
+        header("Location: ../../index.php");
+        die;
+    }
+
     $enderecoUsuario = Endereco::procurarEndereco($_SESSION['usuario_id']);
 ?>
 
