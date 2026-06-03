@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnAbrirEdicao) {
         btnAbrirEdicao.addEventListener('click', () => {
-            console.log('oi'); // Agora vai disparar!
             modalEdicao.classList.add('flex');
             modalEdicao.classList.remove('hidden');
         });

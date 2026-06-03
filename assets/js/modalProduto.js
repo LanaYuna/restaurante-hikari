@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if(modalImagem) modalImagem.src = `../../assets/img/produtos/${imagem}`;
             if(modalId) modalId.value = id;
 
+
+            document.getElementById('modalNomeInput').value = nome;
+            document.getElementById('modalDescricaoInput').value = descricao;
+            document.getElementById('modalPrecoInput').value = preco;
+            document.getElementById('modalImagemInput').value = imagem;
+
             if(modalProduto) {
                 modalProduto.classList.remove('hidden');
                 modalProduto.classList.add('flex');

@@ -1,21 +1,24 @@
 <?php
-// Garante que o array do carrinho existe na sessão
+
+session_start();
+
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
     
     $acao = $_POST['acao'];
 
-    if ($acao === 'adicionar') {
+    if ($acao == 'adicionar') {
         $id = $_POST['produto_id'];
         $nome = $_POST['nome'];
         $descricao = $_POST['descricao'];
         $preco = $_POST['preco'];
         $imagem = $_POST['imagem'];
         $quantidade = isset($_POST['quantidade']) ? (int)$_POST['quantidade'] : 1; 
-        
+
         // Se o produto já está no carrinho, apenas atualiza a quantidade
         if (isset($_SESSION['carrinho'][$id])) {
             $_SESSION['carrinho'][$id]['quantidade'] += $quantidade;
@@ -30,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
             ];
         }
         
-        header('Location: ../views/geral/carrinho.php');
+        header('Location: ../views/geral/menu.php');
         exit;
     }
 
-    if ($acao === 'remover') {
+    if ($acao == 'remover') {
         $id = $_POST['produto_id'];
         
         if (isset($_SESSION['carrinho'][$id])) {
@@ -42,6 +45,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
             unset($_SESSION['carrinho'][$id]); 
         }
         
+        header('Location: ../views/geral/carrinho.php');
+        exit;
+    }
+
+    
+    if ($acao == 'editar') {
+
+        $id = $_POST['produto_id'];
+        $quantidade = (int) $_POST['quantidade'];
+
+        if (
+            isset($_SESSION['carrinho'][$id]) &&
+            $quantidade > 0
+        ) {
+            $_SESSION['carrinho'][$id]['quantidade'] = $quantidade;
+        }
+
         header('Location: ../views/geral/carrinho.php');
         exit;
     }

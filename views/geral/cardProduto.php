@@ -19,16 +19,24 @@
         </div>
 
         <form action="../../controllers/CarrinhoController.php" method="POST" class="flex flex-col gap-4">
+            
             <div class="bg-zinc-900 p-6 rounded-xl flex flex-col gap-4">
 
-                <img id="modalImagem" class="w-full h-56 object-cover rounded-lg">
+                <img id="modalImagem" name="imagem" class="w-56 h-56 object-cover rounded-lg">
 
                 <div>
-                    <h2 id="modalNome" class="text-2xl font-bold"></h2>
-                    <p id="modalDescricao" class="text-zinc-400 mt-2"></p>
+                    <h2 id="modalNome" name="nome" class="text-2xl font-bold"></h2>
+                    <p id="modalDescricao" name="descricao" class="text-zinc-400 mt-2"></p>
                 </div>
 
-                <span id="modalPreco" class="text-xl font-semibold text-red-500"></span>
+                <span id="modalPreco" name="preco" class="text-xl font-semibold text-red-500"></span>
+
+                <input type="hidden" id="modalId" name="produto_id">
+                <input type="hidden" id="modalNomeInput" name="nome">
+                <input type="hidden" id="modalDescricaoInput" name="descricao">
+                <input type="hidden" id="modalPrecoInput" name="preco">
+                <input type="hidden" id="modalImagemInput" name="imagem">
+
 
                 <div class="flex flex-col gap-2">
 
@@ -39,6 +47,7 @@
                     <input
                         type="number"
                         id="quantidade"
+                        name="quantidade"
                         min="1"
                         value="1"
                         class="w-24 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white"
