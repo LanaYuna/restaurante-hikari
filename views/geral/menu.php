@@ -12,15 +12,25 @@
 
 <main class="w-full p-24">
 
+    <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+
+        <form action="../../controllers/CategoriaController.php" method="POST">
+            <button class="mb-12 w-56 items-center justify-center gap-2 text-center bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
+                name="acao"
+                value="adicionar"
+            >
+                Adicionar Categoria
+            </button>
+        </form>
+    
+    <?php endif; ?>
+
     <?php if (!empty($produtosFavoritos)): ?>
-        <section">
+        <section>
             <div class="flex items-center gap-2">
                 <h2 class="text-3xl font-bold text-zinc-100 border-l-4 border-red-600 pl-3 mb-6">
                     Seus Favoritos
                 </h2>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-amber-500 animate-pulse mb-4">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-                </svg>
             </div>
 
             <div class="grid grid-cols-4 gap-5 mb-12">
@@ -74,6 +84,7 @@
             </div>
     <?php endif; ?>
 
+
     <?php foreach ($listaCategorias as $categoria): ?>
 
         <section class="mb-12">
@@ -89,55 +100,70 @@
                 <p class="text-zinc-500 text-sm italic">Nenhum prato disponível nessa categoria</p>
             <?php else: ?>
                 
-                <div class="grid grid-cols-4 gap-5">
-                    
-                    <?php foreach ($produtosDaCategoria as $produto): ?>
-                        <?php $isFavorito = in_array($produto['id'], $idsFavoritados); ?>
+                <div class="grid grid-cols-4 gap-5 mb-12">
+                <?php foreach ($produtosDaCategoria as $produto): ?>
+                    <?php $isFavorito = in_array($produto['id'], $idsFavoritados); ?>
 
-                        <div
-                            class="abrirCardProduto bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 relative transition-all"
-                            data-id="<?php echo $produto['id']; ?>"
-                            data-nome="<?php echo $produto['nome']; ?>"
-                            data-descricao="<?php echo $produto['descricao']; ?>"
-                            data-preco="<?php echo $produto['preco']; ?>"
-                            data-imagem="<?php echo $produto['imagem']; ?>"
+                    <div
+                        class="abrirCardProduto bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 hover:border-zinc-700 relative transition-all"
+                        data-id="<?php echo $produto['id']; ?>"
+                        data-nome="<?php echo $produto['nome']; ?>"
+                        data-descricao="<?php echo $produto['descricao']; ?>"
+                        data-preco="<?php echo $produto['preco']; ?>"
+                        data-imagem="<?php echo $produto['imagem']; ?>"
+                    >
+
+                        <button 
+                            class="favoritar-btn absolute top-3 left-3 z-20 text-zinc-600 hover:text-amber-500 transition-colors p-1"
+                            data-produto-id="<?php echo $produto['id']; ?>"
+                            title="<?php echo $isFavorito ? 'Remover dos favoritos' : 'Favoritar produto'; ?>"
                         >
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 32 32" 
+                                fill="<?php echo $isFavorito ? 'currentColor' : 'none'; ?>" 
+                                stroke="currentColor" 
+                                stroke-width="1.5" 
+                                class="w-6 h-6 <?php echo $isFavorito ? 'text-amber-500' : 'text-zinc-500 hover:text-amber-400'; ?> transition-all duration-200 transform active:scale-75">
+                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />                               
+                            </svg>
+                        </button>
 
-                            <button 
-                                class="favoritar-btn absolute top-3 left-3 z-20 text-zinc-600 hover:text-amber-500 transition-colors p-1"
-                                data-produto-id="<?php echo $produto['id']; ?>"
-                                title="<?php echo $isFavorito ? 'Remover dos favoritos' : 'Favoritar produto'; ?>"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" 
-                                    viewBox="0 0 32 32" 
-                                    fill="<?php echo $isFavorito ? 'currentColor' : 'none'; ?>" 
-                                    stroke="currentColor" 
-                                    stroke-width="1.5" 
-                                    class="w-6 h-6 <?php echo $isFavorito ? 'text-amber-500' : 'text-zinc-500 hover:text-amber-400'; ?> transition-all duration-200 transform active:scale-75">
-                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />                               
-                                </svg>
-                            </button>
+                        <div class="flex flex-col flex-1 pt-8">
+                            <h3 class="font-bold text-zinc-100 group-hover:text-red-500 transition-colors">
+                                <?php echo $produto['nome']; ?>
+                            </h3>
 
-                            <div class="flex flex-col flex-1 pt-8">
-                                <h3 class="font-bold text-zinc-100 group-hover:text-red-500 transition-colors">
-                                    <?php echo $produto['nome']; ?>
-                                </h3>
-
-                                <span class="text-sm text-zinc-400 mt-1">
-                                    R$ <?php echo $produto['preco']; ?>
-                                </span>
-                            </div>
-
-                            <div class="w-24 h-24 bg-zinc-800 rounded-lg overflow-hidden shrink-0 border border-zinc-700/50">
-                                <img
-                                    src="../../assets/img/produtos/<?php echo $produto['imagem']; ?>"
-                                    alt="Foto do <?php echo $produto['nome']; ?>"
-                                    class="w-full h-full object-cover"
-                                >
-                            </div>
-
+                            <span class="text-sm text-zinc-400 mt-1">
+                                R$ <?php echo $produto['preco']; ?>
+                            </span>
                         </div>
-                    <?php endforeach; ?>
+
+                        <div class="w-24 h-24 bg-zinc-800 rounded-lg overflow-hidden shrink-0 border border-zinc-700/50">
+                            <img
+                                src="../../assets/img/produtos/<?php echo $produto['imagem']; ?>"
+                                alt="Foto do <?php echo $produto['nome']; ?>"
+                                class="w-full h-full object-cover"
+                            >
+                        </div>
+
+                        <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                            <div class="border-t border-zinc-800 pt-2 w-full mt-2">
+                                <?php include "../admin/gerenciarProduto.php"; ?>
+                            </div>
+                        <?php endif; ?>
+                        
+                    </div> 
+
+                    <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                        <?php include "../admin/modalEdicaoProduto.php"; ?>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
+                <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                    <?php include "../admin/addProduto.php"; ?>
+                    <?php include "../admin/modalNovoProduto.php"; ?>
+                <?php endif; ?>
 
                 </div>
 
@@ -203,3 +229,5 @@
 <script src="../../assets/js/modalProduto.js" defer></script>
 <script src="../../assets/js/buscaPratos.js" defer></script>
 <script src="../../assets/js/impedeModal.js" defer></script>
+<script src="../../assets/js/modalEdicaoProduto.js" defer></script>
+<script src="../../assets/js/modalAddProduto.js" defer></script>
