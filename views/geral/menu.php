@@ -10,6 +10,19 @@
 
 <main class="w-full p-24">
 
+    <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+
+    <form action="../../controllers/CategoriaController.php" method="POST">
+        <button class="mb-12 w-56 items-center justify-center gap-2 text-center bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
+            name="acao"
+            value="adicionar"
+        >
+            Adicionar Categoria
+        </button>
+    </form>
+    
+    <?php endif; ?>
+
     <?php foreach ($listaCategorias as $categoria): ?>
 
         <section class="mb-12">
@@ -70,6 +83,11 @@
 
                 <?php endforeach; ?>
 
+                <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                    <?php include "../admin/addProduto.php"; ?>
+                    <?php include "../admin/modalNovoProduto.php"; ?>
+                <?php endif; ?>
+
                 </div>
 
             <?php endif; ?>
@@ -86,3 +104,4 @@
 <script src="../../assets/js/modalProduto.js" defer></script>
 <script src="../../assets/js/buscaPratos.js" defer></script>
 <script src="../../assets/js/modalEdicaoProduto.js" defer></script>
+<script src="../../assets/js/modalAddProduto.js" defer></script>

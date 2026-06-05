@@ -1,20 +1,22 @@
-const campoBusca = document.getElementById("buscaPratos");
-const cardsProdutos = document.querySelectorAll(".abrirCardProduto");
+document.addEventListener('DOMContentLoaded', () => {
+    const campoBusca = document.getElementById("buscaPratos");
+    const cardsProdutos = document.querySelectorAll(".abrirCardProduto");
 
-campoBusca.addEventListener("input", () => {
+    campoBusca.addEventListener("input", () => {
 
-    const termo = campoBusca.value.toLowerCase().trim();
+        const termo = campoBusca.value.toLowerCase().trim();
 
-    cardsProdutos.forEach(card => {
+        cardsProdutos.forEach(card => {
 
-        const nomeProduto = card.dataset.nome.toLowerCase();
+            const nomeProduto = card.dataset.nome.toLowerCase();
 
-        if(nomeProduto.includes(termo)){
-            card.style.display = "flex";
-        } else {
-            card.style.display = "none";
-        }
+            if(nomeProduto.includes(termo)){
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
 
     });
-
 });

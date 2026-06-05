@@ -14,7 +14,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
         $imagem_atual = $_POST['imagemAtual']; 
      
         if (empty($nome) || empty($descricao) || empty($preco)) {
-            header("Location: ../views/admin/produtos.php?erro=campos_vazios");
+            header("Location: ../views/geral/menu.php?erro=campos_vazios");
             exit();
         }
 
@@ -54,7 +54,50 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
     }
 
+    if($acao == "cadastrar"){
+
+        $nome = trim($_POST['nome']);
+        $descricao = trim($_POST['descricao']);
+        $preco = trim($_POST['preco']);
+        $categoria_id = $_POST['categoria_id']; 
+
+        if (empty($nome) || empty($descricao) || empty($preco) || empty($categoria_id)) {
+            header("Location: ../views/geral/menu.php?erro=campos_vazios");
+            exit();
+        }
+
+        $imagem_final = "default.png"; 
+
+        if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == UPLOAD_ERR_OK) {
+            
+            $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+            // Gera o nome aleatório para não ter conflito de arquivos duplicados
+            $nome_imagem = uniqid() . "." . $extensao;
+            
+            // Caminho correto apontando para a sua pasta de produtos que você descobriu na edição
+            $pasta_destino = "../assets/img/produtos/" . $nome_imagem;
+
+            // Move o arquivo da pasta temporária do XAMPP para a do seu projeto
+            if (move_uploaded_file($_FILES['imagem']['tmp_name'], $pasta_destino)) {
+                $imagem_final = $nome_imagem; // Sucesso! Definimos o nome gerado para salvar no banco
+            }
+        } 
+
+        // 3. Chama o Model passando todos os dados, inclusive a categoria e o nome da imagem
+        $sucesso = Produto::cadastrar($nome, $descricao, $preco, $imagem_final, $categoria_id);
+
+        // 4. Redirecionamento baseado na variável $sucesso
+        if ($sucesso) {
+            header("Location: ../views/geral/menu.php?cadastro=sucesso");
+        } else {
+            header("Location: ../views/geral/menu.php?cadastro=erro");
+        }
+        exit();
+
+    }
+
     if($acao == "apagar"){ 
+
         $produto_id = $_POST['produto_id'];
 
         $resultado = Produto::apagar($produto_id);

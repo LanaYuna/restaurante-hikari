@@ -33,25 +33,54 @@ Class Produto {
         return $produtos; 
     }
 
-    public static function editar($id, $nome, $descricao, $preco, $imagem){
+    public static function cadastrar($nome, $descricao, $preco, $imagem, $categoria_id){
+
+        $conexao = abrirBanco();
+
+        if($conexao->connect_error){
+            return false;
+        }
+
+        $sql = "INSERT INTO produto (nome, descricao, preco, imagem, categoria_id)
+                VALUES (?, ?, ?, ?, ?)";
+
+        $stmt = $conexao->prepare($sql);
+
+        if(!$stmt){
+            $conexao->close();
+            return false;
+        }
+
+        $stmt->bind_param("ssssi", $nome, $descricao, $preco, $imagem, $categoria_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexao->close();
+
+        return $resultado;
+
+    }
+
+    public static function editar($id,  $nome, $descricao, $preco, $imagem){
 
         $conexao = abrirBanco();
 
         $sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, imagem = ? WHERE id = ?";
             
-            $stmt = $conexao->prepare($sql);
-            
-            if ($stmt === false) {
-                die("Erro na preparação do SQL: " . $conexao->error);
-            }
-            
-            $stmt->bind_param("ssssi", $nome, $descricao, $preco, $imagem, $id);
+        $stmt = $conexao->prepare($sql);
+        
+        if ($stmt === false) {
+            die("Erro na preparação do SQL: " . $conexao->error);
+        }
+        
+        $stmt->bind_param("ssssi", $nome, $descricao, $preco, $imagem, $id);
 
-            $resultado = $stmt->execute();
-            
-            $stmt->close();
-            
-            return $resultado;
+        $resultado = $stmt->execute();
+        
+        $stmt->close();
+        
+        return $resultado;
     }
 
     public static function apagar($produto_id){
