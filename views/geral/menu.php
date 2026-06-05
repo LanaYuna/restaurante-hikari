@@ -27,21 +27,21 @@
                 
                 <div class="grid grid-cols-4 gap-5">
 
-                    <?php foreach ($produtosDaCategoria as $produto): ?>
-                        <div
-                            class="abrirCardProduto bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex items-center justify-between gap-4 hover:border-zinc-700 transition-all"
-                            data-id="<?php echo $produto['id']; ?>"
-                            data-nome="<?php echo $produto['nome']; ?>"
-                            data-descricao="<?php echo $produto['descricao']; ?>"
-                            data-preco="<?php echo $produto['preco']; ?>"
-                            data-imagem="<?php echo $produto['imagem']; ?>"
-                        >
-
+                 <?php foreach ($produtosDaCategoria as $produto): ?>
+                    
+                    <div
+                        class="abrirCardProduto bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex flex-col justify-between gap-4 hover:border-zinc-700 transition-all cursor-pointer relative"
+                        data-id="<?php echo $produto['id']; ?>"
+                        data-nome="<?php echo $produto['nome']; ?>"
+                        data-descricao="<?php echo $produto['descricao']; ?>"
+                        data-preco="<?php echo $produto['preco']; ?>"
+                        data-imagem="<?php echo $produto['imagem']; ?>"
+                    >
+                        <div class="flex items-center justify-between gap-4 w-full">
                             <div class="flex flex-col flex-1">
-                                <h3 class="font-bold">
+                                <h3 class="font-bold text-white">
                                     <?php echo $produto['nome']; ?>
                                 </h3>
-
                                 <span class="text-sm text-zinc-400">
                                     R$ <?php echo $produto['preco']; ?>
                                 </span>
@@ -54,9 +54,21 @@
                                     class="w-full h-full object-cover"
                                 >
                             </div>
-
                         </div>
-                    <?php endforeach; ?>
+
+                        <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                            <div class="border-t border-zinc-800 pt-2 w-full mt-2">
+                                <?php include "../admin/gerenciarProduto.php"; ?>
+                            </div>
+                        <?php endif; ?>
+                        
+                    </div> 
+
+                    <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                        <?php include "../admin/modalEdicaoProduto.php"; ?>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
 
                 </div>
 
@@ -73,3 +85,4 @@
 
 <script src="../../assets/js/modalProduto.js" defer></script>
 <script src="../../assets/js/buscaPratos.js" defer></script>
+<script src="../../assets/js/modalEdicaoProduto.js" defer></script>
