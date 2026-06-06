@@ -53,6 +53,33 @@ Class Categoria {
         return $resultado;
     }
 
+    public static function editar($categoria_id, $nome){
+
+        $conexao = abrirBanco();
+
+        if($conexao->connect_error){
+            return false;
+        }
+
+        $sql = "UPDATE categoria SET nome = ? WHERE id = ?";
+
+        $stmt = $conexao->prepare($sql);
+
+        if(!$stmt){
+            $conexao->close();
+            return false;
+        }
+
+        $stmt->bind_param("si", $nome, $categoria_id);
+
+        $resultado = $stmt->execute();
+
+        $stmt->close();
+        $conexao->close();
+
+        return $resultado;
+    }
+
     public static function apagar($categoria_id){
         $conexao = abrirBanco();
 

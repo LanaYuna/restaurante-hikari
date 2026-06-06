@@ -23,25 +23,41 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
     }
 
     if($acao == "editar"){
-        
+        $categoria_id = $_POST['categoria_id'];
+        $nome = $_POST['nome'];
+
+        $resultado = Categoria::editar($categoria_id, $nome);
+
+        if($resultado){
+
+            header("Location: ../views/geral/menu.php?editar=sucesso");
+        } else {
+            header("Location: ../views/geral/menu.php?editar=erro");
+        }
     }
 
-    if($acao == "apagar"){
+   if($acao == "apagar"){
+
         $categoria_id = $_POST['categoria_id'];
 
         $resultado = Categoria::apagar($categoria_id);
 
-        if($resultado){
+        if($resultado === "possui_produtos"){
+
+            header("Location: ../views/geral/menu.php?delecao=possui_produtos");
+
+        } elseif($resultado){
 
             header("Location: ../views/geral/menu.php?delecao=sucesso");
+
         } else {
 
             header("Location: ../views/geral/menu.php?delecao=erro");
+
         }
 
-        die;
+        die();
     }
-
 
 };
 

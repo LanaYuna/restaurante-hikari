@@ -13,7 +13,7 @@
 
             <button
                 type="button"
-                data-id="<?= $categoria['id'] ?>"
+                data-categoria="<?= $categoria['id'] ?>"
                 class="fecharModalEdicaoCategoria text-zinc-400 hover:text-red-500 transition font-bold"
             >
                 X
@@ -53,9 +53,9 @@
                 type="submit"
                 name="acao"
                 value="editar"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold transition"
+                class="w-full bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
             >
-                Atualizar Categoria
+                Atualizar
             </button>
 
         </form>

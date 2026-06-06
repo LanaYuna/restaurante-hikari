@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Captura todos os botões de abrir edição da página
     const botoesAbrirEdicao = document.querySelectorAll('.abrirModalEdicao');
-    // Captura todos os botões de fechar dos modais
     const botoesFecharEdicao = document.querySelectorAll('.fecharModalEdicao');
 
     // Manipula a abertura do modal correto com base no ID do produto

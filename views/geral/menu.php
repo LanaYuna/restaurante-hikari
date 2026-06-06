@@ -8,9 +8,33 @@
     $listaCategorias = Categoria::exibirCategorias();
     $produtosFavoritos = Produto::buscarFavoritosDoUsuario($_SESSION['usuario_id']); // todos os campos
     $idsFavoritados = array_column($produtosFavoritos, 'id'); // todos os ids
+
+    $exibirErro = false;
+    $mensagemErro = "";
+
+    if(isset($_GET['delecao'])){
+        if($_GET['delecao'] === 'possui_produtos'){
+
+            $exibirErro = true;
+            $mensagemErro = "Não é possível excluir uma categoria que possui produtos.";
+
+        } elseif($_GET['delecao'] === 'erro'){
+
+            $exibirErro = true;
+            $mensagemErro = "Erro ao excluir categoria.";
+        }
+    }
 ?>
 
 <main class="w-full p-24">
+
+    <?php if ($exibirErro): ?>
+
+        <div class="bg-red-900 text-white p-3 rounded-md mb-4 text-center font-medium text-sm shadow-md ">
+            <?php echo $mensagemErro; ?>
+        </div>
+    <?php endif; ?>
+
 
     <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
 
@@ -91,6 +115,7 @@
                 <?php echo $categoria['nome']; ?>
                 <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'){
                     include "../admin/categoria/gerenciarCategoria.php";
+                    include "../admin/categoria/modalEdicaoCategoria.php"; 
                 }?>
             </h2>
 
@@ -267,3 +292,4 @@
 <script src="../../assets/js/modalEdicaoProduto.js" defer></script>
 <script src="../../assets/js/modalAddProduto.js" defer></script>
 <script src="../../assets/js/modalAddCategoria.js" defer></script>
+<script src="../../assets/js/modalEdicaoCategoria.js" defer></script>

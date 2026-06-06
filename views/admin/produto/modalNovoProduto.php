@@ -63,7 +63,7 @@
             </div>
 
             <div class="flex flex-col gap-1">
-                <label class="text-xs font-semibold text-zinc-400 pl-1">Foto do Produto (Deixe vazio para manter a atual)</label>
+                <label class="text-xs font-semibold text-zinc-400 pl-1">Foto do Produto</label>
                 <div class="flex items-center gap-3 bg-zinc-800 border border-zinc-700 rounded-lg p-2">
                     <input
                         type="file"

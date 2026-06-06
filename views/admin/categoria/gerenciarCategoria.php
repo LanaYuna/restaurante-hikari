@@ -1,7 +1,8 @@
 <div class="flex gap-2 mt-6">
     <button
         type="button"
-        data-id="<?= $categoria['id'] ?>" class="abrirModalEdicao w-16 mb-2 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition"
+        data-categoria="<?= $categoria['id'] ?>"
+        class="abrirModalEdicaoCategoria w-16 mb-2 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition"
     >
 
         <svg xmlns="http://www.w3.org/2000/svg"

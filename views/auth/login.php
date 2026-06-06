@@ -1,6 +1,6 @@
 <?php 
 include "../../templates/header.php";
-// Captura se há o parâmetro de erro de login ou de campos vazios na URL
+
 $exibirErro = false;
 $mensagemErro = "";
 
