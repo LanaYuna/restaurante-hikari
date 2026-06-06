@@ -25,7 +25,7 @@
             class="flex-1 max-w-xl bg-zinc-800 text-zinc-100 placeholder-zinc-500 px-5 py-2.5 rounded-full border border-zinc-700 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-sm transition-all"
         >
 
-        <div class="flex items-center gap-8 shrink-0">
+        <div class="flex items-center gap-6 shrink-0">
 
             <button id="abrirModalEndereco" class="text-zinc-400 hover:text-red-500 transition-colors hover:scale-105 duration-200 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -34,6 +34,15 @@
                 </svg>
                 <span>Seu endereço</span>
             </button>
+
+            <a href="menu.php#localizacao" class="text-zinc-400 hover:text-red-500 transition-all hover:scale-105 duration-200 flex items-center gap-2 whitespace-nowrap">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+                </svg>
+
+                <span>Nossa localização</span>
+            </a>
 
             <div class="relative group">
 
@@ -88,11 +97,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:scale-110 transition-transform">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                 </svg>
-
-                <div class="flex flex-col text-left leading-tight border-l border-red-500 pl-3">
-                    <span class="text-sm font-bold">R$ 0,00</span>
-                    <span class="text-xs text-red-200">0 itens</span>
-                </div>
             </a>
 
         </div>

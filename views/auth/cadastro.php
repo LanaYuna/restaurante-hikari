@@ -134,5 +134,5 @@ if (isset($_GET['cadastro']) && $_GET['cadastro'] === 'erro') {
     </div>
 
 </div>
-
-<?php include "../../templates/footer.php"?>
+</body>
+</html>

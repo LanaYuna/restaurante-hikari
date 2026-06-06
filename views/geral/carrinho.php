@@ -140,5 +140,5 @@ $total = 0;
     <?php endif; ?>
 
 </div>
-
-<?php include "../../templates/footer.php"; ?>
+</body>
+</html>

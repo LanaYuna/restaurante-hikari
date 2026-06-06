@@ -76,4 +76,5 @@ if (isset($_GET['login']) && $_GET['login'] === 'erro') {
         </div>
 
     </div>
-<?php include "../../templates/footer.php" ?>
+</body>
+</html>
