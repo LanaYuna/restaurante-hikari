@@ -8,6 +8,12 @@ if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
 
+$pedidoSucesso = false;
+
+if(isset($_GET['pedido']) && $_GET['pedido'] === 'sucesso'){
+    $pedidoSucesso = true;
+}
+
 $total = 0;
 
 ?>
@@ -15,6 +21,14 @@ $total = 0;
 <a href="menu.php" class="font-bold">Voltar para o menu</a>
 
 <div class="max-w-4xl mx-auto p-6">
+
+    <?php if($pedidoSucesso): ?>
+
+    <script>
+        alert("Pedido realizado com sucesso!");
+    </script>
+
+    <?php endif; ?>
 
     <h1 class="text-3xl font-bold mb-6">
         Meu Carrinho
@@ -122,13 +136,61 @@ $total = 0;
                 Total: <strong>R$ <?= number_format($total, 2, ',', '.') ?></strong>
             </p>
 
-            <form action="../../controllers/PedidoController.php" method="POST">
+            <form action="../../controllers/PedidoController.php" method="POST" class="flex flex-col gap-4">
+
+                <div class="flex flex-col gap-3">
+
+                    <h3 class="text-lg font-semibold">
+                        Método de Pagamento
+                    </h3>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="metodo_pagamento"
+                            value="pix"
+                            required
+                        >
+                        PIX
+                    </label>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="metodo_pagamento"
+                            value="credito"
+                            required
+                        >
+                        Cartão de Crédito
+                    </label>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="metodo_pagamento"
+                            value="debito"
+                            required
+                        >
+                        Cartão de Débito
+                    </label>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="metodo_pagamento"
+                            value="dinheiro"
+                            required
+                        >
+                        Dinheiro
+                    </label>
+
+                </div>
 
                 <button
                     type="submit"
                     name="acao"
                     value="comprar"
-                    class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+                    class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 mt-6"
                 >
                     Finalizar Compra
                 </button>

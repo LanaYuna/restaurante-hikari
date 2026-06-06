@@ -22,7 +22,12 @@
 
             $exibirErro = true;
             $mensagemErro = "Erro ao excluir categoria.";
-        }
+
+        } elseif($_GET['delecao'] === 'restricao'){
+
+            $exibirErro = true;
+            $mensagemErro = "Erro ao excluir produto já pedido.";
+        };
     }
 ?>
 
@@ -124,7 +129,14 @@
             ?>
 
             <?php if(empty($produtosDaCategoria)): ?>
-                <p class="text-zinc-500 text-sm italic">Nenhum prato disponível nessa categoria</p>
+
+                <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
+                    <?php include "../admin/produto/addProduto.php"; ?>
+                    <?php include "../admin/produto/modalNovoProduto.php"; ?>
+                <?php else: ?>
+                    <p class="text-zinc-500 text-sm italic">Nenhum prato disponível nessa categoria</p>
+                <?php endif; ?>
+                
             <?php else: ?>
                 
                 <div class="grid grid-cols-4 gap-5 mb-12">

@@ -2,6 +2,8 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/hikari/config/conexao.php';
 
+require_once ROOT_PATH . 'config/conexao.php';
+
 Class Produto {
 
     public static function buscarPorCategoria($categoriaId){
@@ -85,20 +87,39 @@ Class Produto {
         
         if($conexao->connect_error){
             return false;
-            }
-            
-            $sql = "DELETE FROM produto WHERE id = ?";
-            $stmt = $conexao->prepare($sql);
-            
-            $stmt->bind_param("i", $produto_id);
-            
-            $resultado = $stmt->execute();
-            
-            $stmt->close();
-            $conexao->close();
-            
-            return $resultado;
         }
+            
+        $sql = "DELETE FROM produto WHERE id = ?";
+        $stmt = $conexao->prepare($sql);
+        
+        if($stmt){
+            $stmt->bind_param("i", $produto_id);
+
+            try{
+
+                $resultado = $stmt->execute();
+                $stmt->close();
+                $conexao->close();
+                return $resultado;
+
+           
+            } catch(mysqli_sql_exception $erro){
+
+                $stmt->close();
+                $conexao->close();
+
+                if($erro->getCode() == 1451){
+                    return "erro_referencia";
+                }
+
+                return false;
+            }
+        }
+
+        $conexao->close();
+        return false;
+        
+    }
     
     public static function favoritarOuDesfavoritar($usuarioId, $produtoId){
 

@@ -102,9 +102,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
         $resultado = Produto::apagar($produto_id);
 
-        if($resultado){
+        if($resultado === true){
 
             header("Location: ../views/geral/menu.php?delecao=sucesso");
+
+        }  elseif($resultado === "erro_referencia"){
+
+            header("Location: ../views/geral/menu.php?delecao=restricao");
         } else {
 
             header("Location: ../views/geral/menu.php?delecao=erro");

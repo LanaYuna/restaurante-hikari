@@ -3,8 +3,10 @@ session_start();
 
 include "../../templates/header.php";
 require_once "../../models/Usuario.php";
+require_once "../../models/Pedido.php";
 
 $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
+$pedidos = Pedido::exibirPedidos($_SESSION['usuario_id']);
 
 ?>
 
@@ -94,48 +96,6 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
 
     </section>
 
-    <!-- <section
-        id="senha"
-        class="bg-zinc-900 p-8 rounded-xl border border-zinc-800"
-    >
-
-        <h2 class="text-2xl font-bold mb-6">
-            Alterar Senha
-        </h2>
-
-        <form
-            action="../../controllers/UsuarioController.php"
-            method="POST"
-            class="flex flex-col gap-4"
-        >
-
-            <input
-                type="password"
-                name="senhaAtual"
-                placeholder="Senha atual"
-                class="bg-zinc-800 p-3 rounded-lg"
-            >
-
-            <input
-                type="password"
-                name="novaSenha"
-                placeholder="Nova senha"
-                class="bg-zinc-800 p-3 rounded-lg"
-            >
-
-            <button
-                type="submit"
-                name="acao"
-                value="alterarSenha"
-                class="bg-red-600 p-3 rounded-lg  hover:bg-red-700"
-            >
-                Alterar Senha
-            </button>
-
-        </form>
-
-    </section> -->
-
     <section
         id="historico"
         class="bg-zinc-900 p-8 rounded-xl border border-zinc-800"
@@ -147,25 +107,61 @@ $usuario = Usuario::buscarPorId($_SESSION['usuario_id']);
 
         <div class="flex flex-col gap-4">
 
-            <div class="bg-zinc-800 p-4 rounded-lg">
-                <p>Pedido #12</p>
-                <p>15/06/2026</p>
-                <p>R$ 89,90</p>
-                <p class="text-green-500">
-                    Entregue
-                </p>
-            </div>
+            <?php if(empty($pedidos)): ?>
 
-            <div class="bg-zinc-800 p-4 rounded-lg">
-                <p>Pedido #15</p>
-                <p>22/06/2026</p>
-                <p>R$ 120,00</p>
-                <p class="text-green-500">
-                    Entregue
+                <p class="text-zinc-400">
+                    Você ainda não realizou nenhum pedido.
                 </p>
-            </div>
+
+            <?php else: ?>
+
+                <?php foreach ($pedidos as $pedido): ?>
+
+                    <div class="bg-zinc-800 p-5 rounded-lg border border-zinc-700 hover:border-red-600 transition">
+
+                        <div class="flex justify-between items-center mb-3">
+
+                            <h3 class="font-bold text-lg text-white">
+                                Pedido #<?= $pedido['id'] ?>
+                            </h3>
+
+                            <span class="text-sm text-zinc-400">
+                                <?= date('d/m/Y H:i', strtotime($pedido['data_pedido'])) ?>
+                            </span>
+
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+
+                            <div>
+                                <span class="text-zinc-400">
+                                    Total:
+                                </span>
+
+                                <p class="font-semibold text-green-500">
+                                    R$ <?= number_format($pedido['total'], 2, ',', '.') ?>
+                                </p>
+                            </div>
+
+                            <div>
+                                <span class="text-zinc-400">
+                                    Pagamento:
+                                </span>
+
+                                <p class="font-semibold text-white">
+                                    <?= ucfirst($pedido['pagamento']) ?>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
 
         </div>
+
     </section>
 
     <section
