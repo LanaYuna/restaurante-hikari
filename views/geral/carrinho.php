@@ -9,9 +9,14 @@ if (!isset($_SESSION['carrinho'])) {
 }
 
 $pedidoSucesso = false;
+$semEndereco = false;
 
 if(isset($_GET['pedido']) && $_GET['pedido'] === 'sucesso'){
     $pedidoSucesso = true;
+}
+
+if(isset($_GET['erro']) && $_GET['erro'] === 'endereco'){
+    $semEndereco = true;
 }
 
 $total = 0;
@@ -26,6 +31,14 @@ $total = 0;
 
     <script>
         alert("Pedido realizado com sucesso!");
+    </script>
+
+    <?php endif; ?>
+
+    <?php if($semEndereco): ?>
+
+    <script>
+        alert("Cadastre o endereço antes!");
     </script>
 
     <?php endif; ?>
@@ -182,10 +195,34 @@ $total = 0;
                             required
                         >
                         Dinheiro
+                    </label>                
+
+                    <h3 class="text-lg font-semibold mt-6">
+                        Escolha a modalidade
+                    </h3>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="modalidade"
+                            value="balcao"
+                            required
+                        >
+                        Retirada no balcão
+                    </label>
+
+                    <label class="flex items-center gap-2">
+                        <input
+                            type="radio"
+                            name="modalidade"
+                            value="delivery"
+                            required
+                        >
+                        Delivery
                     </label>
 
                 </div>
-
+                
                 <button
                     type="submit"
                     name="acao"
