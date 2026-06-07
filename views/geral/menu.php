@@ -43,13 +43,22 @@
 
     <?php if(isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
 
+        <div class="flex gap-4">
             <button 
                 id="abrirModalNovaCategoria"
-                class="mb-12 w-56 items-center justify-center gap-2 text-center bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
+                class="mb-12 w-40 items-center justify-center gap-2 text-center bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
             >
                 Adicionar Categoria
             </button>
 
+            <a 
+                href="../relatorio/guia.php"
+                class="mb-12 w-40 items-center justify-center gap-2 text-center bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl transition"
+            >
+                Analisar relatórios
+            </a>
+
+        </div>
             <?php include "../admin/categoria/modalNovaCategoria.php"; ?>
     
     <?php endif; ?>
