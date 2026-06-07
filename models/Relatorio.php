@@ -92,6 +92,20 @@ class Relatorio{
         return self::executarConsulta($sql);
     }
 
+    public static function produtosMaisBaratos(){
+
+        $sql = "
+            SELECT 
+                p.nome, 
+                p.preco 
+            FROM produto AS p
+            ORDER BY preco ASC
+        ";
+
+        return self::executarConsulta($sql);
+
+    }
+
     public static function faturamentoPorPeriodo(){
 
         $sql = "
