@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/06/2026 às 22:01
+-- Tempo de geração: 08/06/2026 às 20:59
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -64,7 +64,8 @@ CREATE TABLE `endereco` (
 
 INSERT INTO `endereco` (`id`, `rua`, `numero`, `complemento`, `usuario_id`) VALUES
 (24, 'Rua Prof Antonio', '11', 'casa', 10),
-(25, 'Rua Cristo Rei', '121', 'Apartamento 02', 20);
+(25, 'Rua Cristo Rei', '121', 'Apartamento 02', 20),
+(26, 'Rua Cristo Rei', '121', 'Apartamento 01', 15);
 
 -- --------------------------------------------------------
 
@@ -92,14 +93,14 @@ INSERT INTO `item_pedido` (`id`, `pedido_id`, `produto_id`, `quantidade`, `preco
 (12, 7, 93, 1, 40.00),
 (13, 8, 98, 1, 67.00),
 (14, 8, 103, 3, 5.50),
-(15, 9, 103, 1, 5.50),
-(16, 9, 79, 1, 33.00),
 (17, 10, 104, 3, 6.50),
 (18, 10, 67, 1, 64.00),
 (19, 11, 108, 1, 22.00),
 (20, 12, 82, 1, 56.00),
 (21, 13, 87, 1, 32.00),
-(22, 13, 93, 1, 40.00);
+(22, 13, 93, 1, 40.00),
+(23, 14, 75, 1, 85.00),
+(24, 14, 96, 1, 80.00);
 
 -- --------------------------------------------------------
 
@@ -124,11 +125,11 @@ INSERT INTO `pedido` (`id`, `usuario_id`, `data_pedido`, `total`, `pagamento`) V
 (6, 15, '2026-06-07 00:42:29', 93.00, 'pix'),
 (7, 10, '2026-06-07 15:51:16', 52.00, 'dinheiro'),
 (8, 10, '2026-06-07 15:58:12', 83.50, 'dinheiro'),
-(9, 21, '2026-06-07 15:59:30', 38.50, 'pix'),
 (10, 15, '2026-06-07 15:59:53', 83.50, 'pix'),
 (11, 15, '2026-06-07 16:00:02', 22.00, 'pix'),
 (12, 15, '2026-06-07 16:00:10', 56.00, 'pix'),
-(13, 20, '2026-06-07 16:48:04', 72.00, 'pix');
+(13, 20, '2026-06-07 16:48:04', 72.00, 'pix'),
+(14, 15, '2026-06-08 10:34:42', 165.00, 'dinheiro');
 
 -- --------------------------------------------------------
 
@@ -194,11 +195,11 @@ CREATE TABLE `produto_favorito` (
 --
 
 INSERT INTO `produto_favorito` (`id`, `usuario_id`, `produto_id`, `criado_em`) VALUES
-(106, 15, 104, '2026-06-07 03:42:18'),
-(107, 15, 106, '2026-06-07 03:42:19'),
 (109, 10, 108, '2026-06-07 17:57:31'),
 (111, 10, 106, '2026-06-07 17:57:35'),
-(113, 21, 109, '2026-06-07 18:59:14');
+(116, 15, 108, '2026-06-08 13:21:30'),
+(117, 15, 110, '2026-06-08 13:21:36'),
+(118, 15, 96, '2026-06-08 13:21:50');
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
+  `telefone` varchar(20) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `tipo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -222,9 +223,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nome`, `email`, `telefone`, `senha`, `tipo`) VALUES
 (1, 'lana', 'lana@gmail.com', '44 994376856', '$2y$10$OLvqf1pz8P5.syI911Ppw.eptWSgwvlxmOvzRaLIyCJkyodmyJ1.S', 'admin'),
 (10, 'Eduardo', 'eduardo@gmail.com', '44 9932130921', '$2y$10$mbEpnLiAlIPEY2lr3kbgK.VExCbI2LzR19yx0wf5urGSFhwZPwWD6', 'cliente'),
-(15, 'Vini', 'vini@gmail.com', '44 998410921', '$2y$10$HRycZvNtGujB.4IaP83/6eJWFOX0lFCkF2a1mVaTMJ/WGZLsH2aly', 'cliente'),
-(20, 'lidia', 'lidia@gmail.com', '44 997376857', '$2y$10$wt4Nb.e70Ph3R6f9zbLEEOHu4ZD6rvlOIN5wIvCOrB8ja0MP42Tx6', 'cliente'),
-(21, 'Gustavo', 'gustavo@gmail.com', '44 998410920', '$2y$10$dmFy05cnexI2ZsNZr7OHSOS.8W/5ZXryB/MIE7nck0GH.FhYsCUvy', 'cliente');
+(15, 'Vini', 'vini@gmail.com', '44 968410921', '$2y$10$HRycZvNtGujB.4IaP83/6eJWFOX0lFCkF2a1mVaTMJ/WGZLsH2aly', 'cliente'),
+(20, 'lidia', 'lidia@gmail.com', '44 997376857', '$2y$10$wt4Nb.e70Ph3R6f9zbLEEOHu4ZD6rvlOIN5wIvCOrB8ja0MP42Tx6', 'cliente');
 
 --
 -- Índices para tabelas despejadas
@@ -278,7 +278,8 @@ ALTER TABLE `produto_favorito`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `unique_telefone` (`telefone`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -288,43 +289,43 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `item_pedido`
 --
 ALTER TABLE `item_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT de tabela `produto_favorito`
 --
 ALTER TABLE `produto_favorito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restrições para tabelas despejadas

@@ -8,7 +8,7 @@ session_unset();
 // 3. Destrói a sessão no servidor
 session_destroy();
 
-// 4. (Opcional) Remove o cookie do navegador para limpar o ID da sessão
+
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -17,7 +17,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// 5. Redireciona o usuário para a página de login ou página inicial
 header("Location: ../../index.php");
 exit();
 

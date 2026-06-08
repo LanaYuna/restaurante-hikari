@@ -14,7 +14,6 @@ $pedidos = Pedido::exibirPedidos($_SESSION['usuario_id']);
 
     <a href="menu.php" class="font-bold">
         Voltar para o menu
-
     </a>
 
     <section
