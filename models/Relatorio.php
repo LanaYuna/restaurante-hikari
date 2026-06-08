@@ -87,6 +87,7 @@ class Relatorio{
                 ON u.id = p.usuario_id
             GROUP BY u.id
             ORDER BY total_gasto DESC
+            LIMIT 10
         ";
 
         return self::executarConsulta($sql);
@@ -100,6 +101,7 @@ class Relatorio{
                 p.preco 
             FROM produto AS p
             ORDER BY preco ASC
+            LIMIT 10
         ";
 
         return self::executarConsulta($sql);

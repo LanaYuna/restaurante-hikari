@@ -79,7 +79,7 @@
                 </h2>
 
                 <p class="text-zinc-400 mt-2">
-                    Consulte os pratos mais baratos.
+                    Consulte os 10 pratos mais baratos.
                 </p>
             </a>
 
