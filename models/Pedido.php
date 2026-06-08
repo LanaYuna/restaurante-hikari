@@ -91,11 +91,15 @@ class Pedido {
             return [];
         }
 
-        $sql = "SELECT * FROM pedido";
-        $resultado = $conexao->query($sql);
+        $sql = "SELECT * FROM pedido WHERE usuario_id = ?";
+        $stmt = $conexao->prepare($sql);
         
         $pedidos = [];
-        if ($resultado && $resultado->num_rows > 0) {
+        if ($stmt) {
+            $stmt->bind_param("i", $usuario_id); 
+            $stmt->execute();
+
+            $resultado = $stmt->get_result();
             while ($linha = $resultado->fetch_assoc()) {
                 $pedidos[] = $linha;
             }
