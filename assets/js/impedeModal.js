@@ -13,7 +13,7 @@ document.querySelectorAll('.favoritar-btn').forEach(btn => {
             },
             body: JSON.stringify({ produto_id: produtoId })
         })
-        .then(response => response.json())
+        .then(response => response.json()) // Converte para objeto JavaScript
         .then(data => {
             if (data.status === 'adicionado') {
                 svg.setAttribute('fill', 'currentColor');

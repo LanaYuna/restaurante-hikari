@@ -92,31 +92,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
 
     }
 
-    if($_POST["acao"] == "alterarSenha"){
-
-        $senhaAtual = $_POST["senhaAtual"];
-        $senhaNova = $_POST["senhaNova"];
-
-        $resultado = Usuario::buscarEmail($email);
-
-        if($resultado){
-            $senhaBanco = $resultado["senha"];
-
-            if(password_verify($senha, $senhaBanco)){ 
-
-                $resultadoAtualizacao = Usuario::alterarSenha();
-        
-                    header("Location: ../views/geral/contaUsuario.php?edicao=sucesso");
-                    
-                } else {
-                    // Senha incorreta
-                    header("Location: ../views/views/geral/contaUsuario.php?edicao=erro");
-                }
-            }
-        die;
-
-    }
-
     if($_POST["acao"] == "apagar"){
 
         $resultado = Usuario::apagar($usuario_id);

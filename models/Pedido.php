@@ -6,6 +6,7 @@ require_once ROOT_PATH . 'config/conexao.php';
 
 class Pedido {
 
+    // acionado por "comprar" em PedidoController 
     public static function finalizarPedido( $usuario_id, $carrinho, $pagamento) {
 
         $conexao = abrirBanco();

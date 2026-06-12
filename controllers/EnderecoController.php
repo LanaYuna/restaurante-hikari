@@ -7,6 +7,7 @@ require_once "../models/Endereco.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    // template: modalCadastroEndereco
     if($_POST["acao"] == "cadastrar"){
 
         $rua = $_POST["rua"];

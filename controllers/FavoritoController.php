@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $dados = json_decode(file_get_contents("php://input"), true);
+    $dados = json_decode(file_get_contents("php://input"), true); // Transforma JSON em array PHP 
     $produtoId = isset($dados['produto_id']) ? (int)$dados['produto_id'] : null;
 
     if ($produtoId) {

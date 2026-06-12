@@ -30,7 +30,6 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ){
                 // Se o upload deu certo, a nova imagem será salva no banco
                 $imagem_final = $nome_imagem;
                 
-                // Opcional: Deletar a imagem antiga da pasta para não acumular lixo
                 if (file_exists("../assets/img/produtos/" . $imagem_atual)) {
                     unlink("../assets/img/produtos/" . $imagem_atual);
                 }
